@@ -3,14 +3,11 @@ import React, { useState, useEffect } from "react";
 import tasksApi from "apis/tasks";
 import { PageLoader, PageTitle, Container } from "components/commons";
 import Table from "components/Tasks/Table";
-import Logger from "js-logger";
 import { isNil, isEmpty, either } from "ramda";
-import { useHistory } from "react-router-dom";
 
-const Dashboard = () => {
+const Dashboard = ({ history }) => {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
-  const history = useHistory();
 
   const fetchTasks = async () => {
     try {
@@ -18,20 +15,29 @@ const Dashboard = () => {
         data: { tasks },
       } = await tasksApi.fetch();
       setTasks(tasks);
-      setLoading(false);
     } catch (error) {
-      Logger.error(error);
+      logger.error(error);
+    } finally {
       setLoading(false);
     }
+  };
+
+  const destroyTask = async slug => {
+    try {
+      await tasksApi.destroy(slug);
+      await fetchTasks();
+    } catch (error) {
+      logger.error(error);
+    }
+  };
+
+  const showTask = slug => {
+    history.push(`/tasks/${slug}/show`);
   };
 
   useEffect(() => {
     fetchTasks();
   }, []);
-
-  const showTask = slug => {
-    history.push(`/tasks/${slug}/show`);
-  };
 
   if (loading) {
     return (
@@ -55,7 +61,7 @@ const Dashboard = () => {
     <Container>
       <div className="flex flex-col gap-y-8">
         <PageTitle title="Todo list" />
-        <Table data={tasks} showTask={showTask} />
+        <Table data={tasks} destroyTask={destroyTask} showTask={showTask} />
       </div>
     </Container>
   );
