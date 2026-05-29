@@ -4,11 +4,17 @@ import tasksApi from "apis/tasks";
 import { Container, PageLoader } from "components/commons";
 import { useHistory, useParams } from "react-router-dom";
 
+import { Button } from "../commons";
+
 const Show = () => {
   const [task, setTask] = useState([]);
   const [pageLoading, setPageLoading] = useState(true);
   const { slug } = useParams();
   const history = useHistory();
+
+  const updateTask = () => {
+    history.push(`/tasks/${task.slug}/edit`);
+  };
 
   const fetchTaskDetails = async () => {
     try {
@@ -39,6 +45,15 @@ const Show = () => {
             <h2 className="text-3xl font-semibold">
               Task Title: {task?.title}
             </h2>
+          </div>
+          <div className="flex items-center justify-end gap-x-3">
+            <Button
+              buttonText="Edit"
+              icon="edit-line"
+              size="small"
+              style="secondary"
+              onClick={updateTask}
+            />
           </div>
         </div>
       </div>
