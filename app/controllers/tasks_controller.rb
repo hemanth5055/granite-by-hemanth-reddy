@@ -15,7 +15,8 @@ class TasksController < ApplicationController
  end
 
   def show
-    render_json({ task: @task.as_json(include: :assigned_user) })
+    puts(@tasks)
+    render
   end
 
   def update
