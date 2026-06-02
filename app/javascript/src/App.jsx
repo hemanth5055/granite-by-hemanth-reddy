@@ -5,10 +5,13 @@ import { CreateTask, ShowTask, EditTask } from "components/Tasks";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
+import Signup from "./components/Authentication/Signup";
+
 const App = () => (
   <Router>
     <ToastContainer />
     <Switch>
+      <Route exact component={Signup} path="/signup" />
       <Route exact component={EditTask} path="/tasks/:slug/edit" />
       <Route exact component={ShowTask} path="/tasks/:slug/show" />
       <Route exact component={CreateTask} path="/tasks/create" />
