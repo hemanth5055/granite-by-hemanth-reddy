@@ -34,7 +34,10 @@ const NavBar = () => {
             >
               Add new task
             </Link>
-            <Link className="flex items-center gap-x-1 rounded-md bg-gray-200 px-4 py-2 text-sm font-medium text-gray-800 hover:bg-gray-300 focus:shadow">
+            <Link
+              className="flex items-center gap-x-1 rounded-md bg-gray-200 px-4 py-2 text-sm font-medium text-gray-800 hover:bg-gray-300 focus:shadow"
+              to="*"
+            >
               <span className="block">{userName}</span>
             </Link>
           </div>
