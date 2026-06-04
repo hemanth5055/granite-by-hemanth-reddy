@@ -5,11 +5,27 @@ class TasksController < ApplicationController
   after_action :verify_authorized, except: :index
   after_action :verify_policy_scoped, only: :index
 
+  def self.of_status(progress)
+    if progress == :pending
+      pending.in_order_of(:status, %w(starred unstarred)).order("updated_at DESC")
+     else
+       completed.in_order_of(:status, %w(starred unstarred)).order("updated_at DESC")
+    end
+  end
+
+  # previous code...
   def index
     tasks = policy_scope(Task)
-    @pending_tasks = tasks.pending.includes(:assigned_user)
-    @completed_tasks = tasks.completed
+
+    pending_starred = tasks.pending.starred.includes(:assigned_user).order("updated_at DESC")
+    pending_unstarred = tasks.pending.unstarred.includes(:assigned_user).order("updated_at DESC")
+    @pending_tasks = pending_starred + pending_unstarred
+
+    completed_starred = tasks.completed.starred.order("updated_at DESC")
+    completed_unstarred = tasks.completed.unstarred.order("updated_at DESC")
+    @completed_tasks = completed_starred + completed_unstarred
   end
+  # previous code...
 
   def create
     task = current_user.created_tasks.new(task_params)
@@ -38,7 +54,7 @@ class TasksController < ApplicationController
   private
 
     def task_params
-      params.require(:task).permit(:title, :assigned_user_id, :progress)
+      params.require(:task).permit(:title, :assigned_user_id, :progress, :status)
     end
 
     def load_task!

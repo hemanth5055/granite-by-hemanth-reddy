@@ -14,10 +14,10 @@ const Show = () => {
   const { slug } = useParams();
   const history = useHistory();
 
-  const destroyTask = async slug => {
+  const destroyTask = async () => {
     try {
-      await tasksApi.destroy({ slug, quiet: true });
-      await fetchTaskDetails();
+      await tasksApi.destroy({ slug: task.slug });
+      history.push("/");
     } catch (error) {
       logger.error(error);
     }
@@ -110,4 +110,5 @@ const Show = () => {
     </Container>
   );
 };
+
 export default Show;
