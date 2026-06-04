@@ -65,8 +65,8 @@ group :test do
 end
 
 gem "connection_pool", "~> 2.4"
+gem "pundit"
 gem "react-rails", "~> 2.7.1"
-
 group :development, :test do
   gem "factory_bot_rails"
 
