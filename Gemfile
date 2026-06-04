@@ -68,7 +68,10 @@ gem "connection_pool", "~> 2.4"
 gem "react-rails", "~> 2.7.1"
 
 group :development, :test do
-  # previous gems under this group as it was
+  gem "factory_bot_rails"
+
+  # For auto-generating demo data
+  gem "faker"
 
   # For code formatting and linting
   gem "rubocop", require: false
