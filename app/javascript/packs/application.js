@@ -1,6 +1,6 @@
-import "../stylesheets/application.scss";
 import ReactRailsUJS from "react_ujs";
 import App from "../src/App";
+import "../stylesheets/application.scss";
 
 import { registerIntercepts, setAuthHeaders } from "apis/axios";
 import { initializeLogger } from "common/logger";
