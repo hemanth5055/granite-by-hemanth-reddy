@@ -1,20 +1,14 @@
-import autoprefixer from "autoprefixer";
-import postcssFlexbugsFixes from "postcss-flexbugs-fixes";
-import postcssImport from "postcss-import";
-import postcssPresetEnv from "postcss-preset-env";
-import tailwindcss from "tailwindcss";
-
-export default {
+module.exports = {
   plugins: [
-    postcssImport,
-    postcssFlexbugsFixes,
-    postcssPresetEnv({
+    require("postcss-import"),
+    require("postcss-flexbugs-fixes"),
+    require("postcss-preset-env")({
       autoprefixer: {
         flexbox: "no-2009",
       },
       stage: 3,
     }),
-    tailwindcss("./tailwind.config.js"),
-    autoprefixer,
+    require("tailwindcss")("./tailwind.config.js"),
+    require("autoprefixer"),
   ],
 };

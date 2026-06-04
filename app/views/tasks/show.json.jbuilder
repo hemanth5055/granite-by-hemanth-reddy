@@ -11,7 +11,7 @@ json.task do
     json.name @task.assigned_user.name
   end
 
-  json.comments @comments do |comment|
+  json.comments @task.comments do |comment|
      json.extract! comment,
        :id,
        :content,

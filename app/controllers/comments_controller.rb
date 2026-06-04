@@ -12,6 +12,7 @@ class CommentsController < ApplicationController
   def show
     authorize @task
     @comments = @task.comments.order("created_at DESC")
+    puts @comments
   end
 
   private
