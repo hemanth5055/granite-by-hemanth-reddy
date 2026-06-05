@@ -62,6 +62,7 @@ end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
+  gem "minitest-bisect"
 end
 
 gem "connection_pool", "~> 2.4"
