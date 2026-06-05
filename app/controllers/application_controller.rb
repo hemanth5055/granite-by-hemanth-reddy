@@ -2,12 +2,12 @@
 
 class ApplicationController < ActionController::Base
   include Pundit::Authorization
+  rescue_from StandardError, with: :handle_api_exception
+
   rescue_from Pundit::NotAuthorizedError, with: :handle_authorization_error
 
   protect_from_forgery
   before_action :authenticate_user_using_x_auth_token
-
-  rescue_from StandardError, with: :handle_api_exception
 
   def handle_api_exception(exception)
     case exception

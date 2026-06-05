@@ -30,6 +30,7 @@
 en:
   hello: "Hello world"
   task:
+    not_found: "Couldn't find Task"
     slug:
       immutable: "is immutable!"
   generic_error: "Something went wrong. Please try again later."
