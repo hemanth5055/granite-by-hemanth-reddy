@@ -6,7 +6,9 @@ json.tasks do
     json.extract! pending_task,
       :progress,
       :status
+    json.comments_count pending_task.comments.size
   end
 
   json.completed @completed_tasks
+
 end
