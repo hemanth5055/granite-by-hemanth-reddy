@@ -26,13 +26,12 @@ jobs:
           install-yarn: true
           node-version: "22.13"
       - run: node --version
-      - run: gem install bundler:2.1.4
+      - run: gem install bundler:4.0.12
       #install sqlite dependency
       - run: sudo apt update && sudo apt install zlib1g-dev libsqlite3-dev
       # Bundle install
-      - run:
-          bundle check --path=vendor/bundle || bundle install
-          --path=vendor/bundle --jobs=4 --retry=3
+      - run: bundle config set path 'vendor/bundle'
+      - run: bundle check || bundle install --jobs=4 --retry
       # Yarn install
       - run: yarn install --cache-folder vendor/node_modules
       # Ensure Rubocop has linted all Ruby files
