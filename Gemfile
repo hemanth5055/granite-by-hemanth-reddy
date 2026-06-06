@@ -90,4 +90,5 @@ gem "pry-byebug"
 
 gem "data_migrate"
 
+gem "sidekiq", "~> 7.0"
 gem "simplecov", require: false, group: :test
